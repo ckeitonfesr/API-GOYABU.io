@@ -1,24 +1,32 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const BASE_URL = "https://goyabu.io/anime/";
+
 module.exports = async (req, res) => {
   try {
-    const url = String(req.query.url || "").trim();
+    // Pega o ID da query string (ex: ?id=overlord-4-dublado-online)
+    const id = String(req.query.id || "").trim();
 
-    if (!url) {
+    if (!id) {
       return res.status(400).json({
         success: false,
-        error: "URL vazia"
+        error: "ID do anime não fornecido. Use ?id=nome-do-anime"
       });
     }
 
-    // Verificar se é uma URL válida do goyabu
-    if (!url.includes('goyabu.io')) {
+    // Constrói a URL completa
+    const url = BASE_URL + id;
+
+    // Verificação básica para evitar injeção ou URLs inválidas
+    if (!url.startsWith(BASE_URL)) {
       return res.status(400).json({
         success: false,
-        error: "URL inválida - use apenas URLs do goyabu.io"
+        error: "ID inválido"
       });
     }
+
+    console.log(`Buscando sinopse para: ${url}`);
 
     const { data } = await axios.get(url, {
       headers: {
@@ -28,43 +36,42 @@ module.exports = async (req, res) => {
 
     const $ = cheerio.load(data);
 
-    // Pegar sinopse
-    const full = $(".sinopse-full").text().trim();
-    const short = $(".sinopse-short").text().trim();
-    const sinopse = full || short;
-
-    // Pegar título
-    const titulo = $(".entry-title").text().trim();
-
-    // Pegar link do player
-    let playerLink = $("#player iframe").attr("src");
-    
-    // Se não encontrar com #player, tenta outros seletores comuns
-    if (!playerLink) {
-      playerLink = $("iframe[src*='goyabu']").attr("src") || 
-                   $(".video-embed iframe").attr("src") ||
-                   $(".player iframe").attr("src");
+    // Pegar sinopse (tentando diferentes seletores que podem existir na página)
+    let sinopse = $(".sinopse-full").text().trim();
+    if (!sinopse) {
+      sinopse = $(".sinopse-short").text().trim();
+    }
+    if (!sinopse) {
+      // Se não encontrar com as classes específicas, tenta um seletor mais genérico
+      sinopse = $(".anime-sinopse").text().trim() || 
+                $(".description p").first().text().trim() ||
+                $("meta[name='description']").attr("content");
     }
 
-    // Limpar o link do player se necessário
-    if (playerLink && playerLink.startsWith('//')) {
-      playerLink = 'https:' + playerLink;
-    }
+    // Limpeza básica da sinopse
+    sinopse = sinopse.replace(/\s+/g, ' ').trim();
 
-    // Retornar os dados
+    // Retornar os dados no mesmo formato do seu endpoint de busca
     return res.status(200).json({
       success: true,
       data: {
-        titulo: titulo,
-        sinopse: sinopse,
-        player_link: playerLink || null,
-        url_original: url
+        id: id,
+        url: url,
+        sinopse: sinopse || "Sinopse não encontrada"
       }
     });
 
   } catch (error) {
     console.error("Erro detalhado:", error);
     
+    // Tratamento especial para erro 404 (anime não encontrado)
+    if (error.response && error.response.status === 404) {
+      return res.status(404).json({
+        success: false,
+        error: "Anime não encontrado. Verifique o ID fornecido."
+      });
+    }
+
     return res.status(500).json({
       success: false,
       error: error?.message || "Erro interno do servidor"
