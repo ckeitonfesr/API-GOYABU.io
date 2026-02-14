@@ -7,12 +7,14 @@ const load = cheerioPkg.load || (cheerioPkg.default && cheerioPkg.default.load);
 module.exports = async (req, res) => {
   try {
     const episodeId = String(req.query.episode_id || "").trim();
-    if (!episodeId) return res.status(400).json({ success: false, error: "episode_id vazio" });
+    if (!episodeId) {
+      return res.status(400).json({ success: false, error: "episode_id vazio" });
+    }
 
     if (!load) {
       return res.status(500).json({
         success: false,
-        error: "Cheerio load() não disponível (import/require quebrado)."
+        error: "Cheerio load() não disponível."
       });
     }
 
@@ -29,18 +31,31 @@ module.exports = async (req, res) => {
       const decoded = Buffer.from(encrypted, "base64").toString("utf8");
       const link = decoded.split("").reverse().join("");
 
-      return res.json({ success: true, video_url: link, source: "iframe_player" });
+      return res.json({
+        success: true,
+        video_url: link
+      });
     }
 
     const scriptText = $("script").text();
     const match = scriptText.match(/blogger_token":"([^"]+)"/);
     if (match) {
       const bloggerLink = `https://www.blogger.com/video.g?token=${match[1]}`;
-      return res.json({ success: true, video_url: bloggerLink, source: "blogger_token" });
+      return res.json({
+        success: true,
+        video_url: bloggerLink
+      });
     }
 
-    return res.json({ success: false, error: "Não foi possível extrair o vídeo" });
+    return res.json({
+      success: false,
+      error: "Não foi possível extrair o vídeo"
+    });
+
   } catch (err) {
-    return res.status(500).json({ success: false, error: err?.message || String(err) });
+    return res.status(500).json({
+      success: false,
+      error: err?.message || String(err)
+    });
   }
 };
