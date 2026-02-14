@@ -94,9 +94,9 @@ module.exports = async (req, res) => {
 
     <div class="item">
       <p class="k">Sinopse</p>
-      <p class="d">Você pode passar o nome com espaços (na URL vira %20). A API troca por hífen (-) e monta a página.</p>
+      <p class="d">Você pode passar o nome com espaços (na URL vira - ). A API troca por hífen (-) e monta a página.</p>
       <pre>${base}/api/sinopse/isekai%20dark%20web</pre>
-      <pre>Ex: "isekai dark web" -> "isekai-dark-web"</pre>
+      <pre>Ex: "dvhackz lopes" -> ""dvhackz-lopes"</pre>
     </div>
 
     <div class="foot">status: online</div>
