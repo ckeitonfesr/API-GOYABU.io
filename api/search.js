@@ -37,6 +37,9 @@ module.exports = async (req, res) => {
       $("h1").first().text().trim() ||
       $("meta[property='og:title']").attr("content") ||
       "";
+    
+    // Pegar link do player
+    const playerLink = $("#player iframe").attr("src") || "";
 
     return res.status(200).json({
       success: true,
@@ -44,7 +47,8 @@ module.exports = async (req, res) => {
       page_url: pageUrl,
       title,
       image,
-      sinopse
+      sinopse,
+      player_link: playerLink // Novo campo com o link do player
     });
 
   } catch (err) {
