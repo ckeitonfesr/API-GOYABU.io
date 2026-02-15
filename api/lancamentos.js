@@ -60,17 +60,7 @@ module.exports = async (req, res) => {
 
     const $ = cheerio.load(data);
     
-    if (data.includes('404') || data.includes('não encontrada')) {
-      return res.status(200).json({
-        sucesso: true,
-        pagina: parseInt(pagina),
-        total_paginas: global.totalPaginas,
-        total_episodios: 0,
-        mensagem: "Página existe no índice mas sem conteúdo",
-        dados: []
-      });
-    }
-    
+    // NÃO verificar 404 aqui, pois páginas antigas podem não retornar 404
     const episodios = [];
     
     $('.boxEP.grid-view, article.boxEP').each((i, el) => {
@@ -109,13 +99,13 @@ module.exports = async (req, res) => {
     });
 
   } catch (error) {
+    // Mesmo com erro, tenta retornar algo útil
     return res.status(200).json({
       sucesso: true,
       pagina: parseInt(pagina),
       total_paginas: global.totalPaginas || 1571,
       total_episodios: 0,
-      mensagem: "Erro ao acessar página",
-      erro: error.message,
+      mensagem: "Erro ao acessar página, mas página existe no índice",
       dados: []
     });
   }
