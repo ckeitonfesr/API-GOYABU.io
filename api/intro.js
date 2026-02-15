@@ -464,7 +464,7 @@ module.exports = async (req, res) => {
   }
   .footer a:hover{opacity:1}
 
-  /* MOBILE: sidebar vira drawer */
+  /* MOBILE */
   .mobileBar{
     display:none;
     position:sticky;
@@ -529,14 +529,10 @@ module.exports = async (req, res) => {
     margin-bottom:1rem;
   }
 
-  @media (max-width: 1020px){
-    .container{ grid-template-columns: 300px 1fr; }
-  }
-
   @media (max-width: 900px){
     body{ padding:1rem; }
     .mobileBar{ display:block; margin:-1rem -1rem 1rem; }
-    .container{ grid-template-columns: 1fr; }
+    .container{ grid-template-columns:1fr; }
     .sidebar{ display:none; }
     .content{ padding:1.6rem; border-radius:22px; }
     .grid-2{ grid-template-columns:1fr; }
@@ -555,7 +551,6 @@ module.exports = async (req, res) => {
 </head>
 <body>
 
-<!-- mobile top bar -->
 <div class="mobileBar">
   <div class="mobileBarInner">
     <div class="mobileTitle">
@@ -626,7 +621,6 @@ module.exports = async (req, res) => {
 
 <div class="container">
 
-  <!-- desktop sidebar -->
   <aside class="sidebar">
     <div class="topbar">
       <div class="brand">
@@ -683,13 +677,11 @@ module.exports = async (req, res) => {
     </div>
   </aside>
 
-  <!-- content -->
   <main class="content">
     <section id="introducao">
       <h2 class="section-title">Introdução</h2>
       <p class="text-large">
-        Documentação oficial da <strong>Anime API</strong>. Aqui você encontra o fluxo correto para
-        pesquisar um anime, listar episódios e pegar o <strong>link do vídeo</strong>.
+        Documentação oficial da <strong>Anime API</strong>. Fluxo correto para buscar anime, listar episódios e pegar o <strong>link do vídeo</strong>.
       </p>
 
       <div class="tip-box">
@@ -700,26 +692,18 @@ module.exports = async (req, res) => {
           3) <a href="${base}/api/episode-video?episode_id=40930" target="_blank" rel="noreferrer">Episode Video</a> → use o <code>video_url</code>
         </p>
       </div>
-
-      <div class="grid-2">
-        <div class="mini">
-          <h4><span class="tag">JSON</span></h4>
-          <p>As rotas retornam JSON. Este endpoint <code>/api/intro</code> retorna HTML.</p>
-        </div>
-        <div class="mini">
-          <h4><span class="tag">GET</span></h4>
-          <p>Rotas são chamadas via query params (<code>?chave=valor</code>).</p>
-        </div>
-      </div>
     </section>
 
-    <section id="fluxo" style="margin-top: 3.5rem;">
+    <section id="fluxo" style="margin-top:3.5rem;">
       <h2 class="section-title">Fluxo (nome → vídeo)</h2>
       <p class="text-large">
-        Ordem correta: <strong>Nome</strong> → <strong>anime_id</strong> → <strong>episodes</strong> → <strong>episode_id</strong> → <strong>video_url</strong>.
+        Ordem: <strong>Nome</strong> → <strong>anime_id</strong> → <strong>episodes</strong> → <strong>episode_id</strong> → <strong>video_url</strong>.
       </p>
+    </section>
 
-      <h3 class="subsection-title">1) Buscar pelo nome</h3>
+    <section id="search" style="margin-top:3.5rem;">
+      <h2 class="section-title">Search</h2>
+      <p class="text-large">Busca por palavra-chave. Parâmetro obrigatório: <code>keyword</code>.</p>
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -729,12 +713,19 @@ module.exports = async (req, res) => {
             <button class="btn" data-copy="${base}/api/search?keyword=overlord">copiar</button>
           </div>
         </div>
-        <div class="endpoint-description">
-          Retorna lista/objeto de animes. Pegue o campo <strong>id</strong> do anime (isso é o <strong>anime_id</strong>).
-        </div>
+        <div class="endpoint-description">Retorna itens com <strong>id</strong> (anime_id) e <strong>dublado</strong> (true/false).</div>
       </div>
+      <table class="params-table">
+        <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>keyword <span class="param-required">obrigatório</span></td><td>string</td><td>Termo de busca</td></tr>
+        </tbody>
+      </table>
+    </section>
 
-      <h3 class="subsection-title">2) Buscar episódios (com anime_id)</h3>
+    <section id="episodes" style="margin-top:3.5rem;">
+      <h2 class="section-title">Episódios</h2>
+      <p class="text-large">Lista episódios usando <strong>anime_id</strong>.</p>
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -744,12 +735,19 @@ module.exports = async (req, res) => {
             <button class="btn" data-copy="${base}/api/episodes?anime_id=40927">copiar</button>
           </div>
         </div>
-        <div class="endpoint-description">
-          Retorna episódios do anime. Pegue o <strong>id</strong> do episódio (isso é o <strong>episode_id</strong>).
-        </div>
+        <div class="endpoint-description">Parâmetro obrigatório: <code>anime_id</code>. Retorna episódios com <code>id</code> (episode_id).</div>
       </div>
+      <table class="params-table">
+        <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>anime_id <span class="param-required">obrigatório</span></td><td>number</td><td>ID do anime obtido em <code>/search</code></td></tr>
+        </tbody>
+      </table>
+    </section>
 
-      <h3 class="subsection-title">3) Pegar o vídeo (com episode_id)</h3>
+    <section id="episodevideo" style="margin-top:3.5rem;">
+      <h2 class="section-title">Vídeo do episódio</h2>
+      <p class="text-large">Retorna o <strong>video_url</strong> usando <strong>episode_id</strong>.</p>
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -759,117 +757,30 @@ module.exports = async (req, res) => {
             <button class="btn" data-copy="${base}/api/episode-video?episode_id=40930">copiar</button>
           </div>
         </div>
-        <div class="endpoint-description">
-          Retorna <strong>video_url</strong> pronto para colocar no player.
-        </div>
+        <div class="endpoint-description">Parâmetro obrigatório: <code>episode_id</code>. Resposta: <code>{ success, video_url }</code>.</div>
       </div>
-    </section>
-
-    <section id="boaspraticas" style="margin-top: 3.5rem;">
-      <h2 class="section-title">Boas práticas</h2>
-      <ul style="margin-left: 1.2rem; color: var(--muted);">
-        <li><strong style="color:var(--text)">Debounce</strong>: espere ~300ms na busca antes de chamar <code>/search</code>.</li>
-        <li><strong style="color:var(--text)">Cache</strong>: salve resultados de <code>/search</code> e <code>/episodes</code> por alguns minutos.</li>
-        <li><strong style="color:var(--text)">Erros</strong>: trate 400/500 no front (ex: id vazio / timeout).</li>
-      </ul>
-    </section>
-
-    <section id="search" style="margin-top: 3.5rem;">
-      <h2 class="section-title">Search</h2>
-      <p class="text-large">Busca animes por palavra-chave. Retorna itens com <strong>id</strong> e <strong>dublado</strong> (true/false).</p>
-
-      <div class="endpoint-card">
-        <div class="endpoint-head">
-          <span class="endpoint-method">GET</span>
-          <span class="endpoint-path">/api/search?keyword={texto}</span>
-          <div class="endpoint-actions">
-            <a class="btn" href="${base}/api/search?keyword=overlord" target="_blank" rel="noreferrer">teste</a>
-            <button class="btn" data-copy="${base}/api/search?keyword=overlord">copiar</button>
-          </div>
-        </div>
-        <div class="endpoint-description">Parâmetro obrigatório: <code>keyword</code>.</div>
-      </div>
-
       <table class="params-table">
         <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
         <tbody>
-          <tr><td>keyword <span class="param-required">obrigatório</span></td><td>string</td><td>Termo de busca (ex: overlord)</td></tr>
+          <tr><td>episode_id <span class="param-required">obrigatório</span></td><td>number</td><td>ID do episódio obtido em <code>/episodes</code></td></tr>
         </tbody>
       </table>
-
-      <div class="code-block"><code>GET ${base}/api/search?keyword=overlord</code></div>
     </section>
 
-    <section id="episodes" style="margin-top: 3.5rem;">
-      <h2 class="section-title">Episódios</h2>
-      <p class="text-large">Lista episódios de um anime usando <strong>anime_id</strong>.</p>
-
-      <div class="endpoint-card">
-        <div class="endpoint-head">
-          <span class="endpoint-method">GET</span>
-          <span class="endpoint-path">/api/episodes?anime_id={id}</span>
-          <div class="endpoint-actions">
-            <a class="btn" href="${base}/api/episodes?anime_id=40927" target="_blank" rel="noreferrer">teste</a>
-            <button class="btn" data-copy="${base}/api/episodes?anime_id=40927">copiar</button>
-          </div>
-        </div>
-        <div class="endpoint-description">Parâmetro obrigatório: <code>anime_id</code>.</div>
-      </div>
-
-      <table class="params-table">
-        <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
-        <tbody>
-          <tr><td>anime_id <span class="param-required">obrigatório</span></td><td>number</td><td>ID obtido no endpoint <code>/search</code></td></tr>
-        </tbody>
-      </table>
-
-      <div class="code-block"><code>GET ${base}/api/episodes?anime_id=40927</code></div>
-    </section>
-
-    <section id="episodevideo" style="margin-top: 3.5rem;">
-      <h2 class="section-title">Vídeo do episódio</h2>
-      <p class="text-large">Retorna o link final do vídeo para assistir usando <strong>episode_id</strong>.</p>
-
-      <div class="endpoint-card">
-        <div class="endpoint-head">
-          <span class="endpoint-method">GET</span>
-          <span class="endpoint-path">/api/episode-video?episode_id={id}</span>
-          <div class="endpoint-actions">
-            <a class="btn" href="${base}/api/episode-video?episode_id=40930" target="_blank" rel="noreferrer">teste</a>
-            <button class="btn" data-copy="${base}/api/episode-video?episode_id=40930">copiar</button>
-          </div>
-        </div>
-        <div class="endpoint-description">Parâmetro obrigatório: <code>episode_id</code>.</div>
-      </div>
-
-      <table class="params-table">
-        <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
-        <tbody>
-          <tr><td>episode_id <span class="param-required">obrigatório</span></td><td>number</td><td>ID obtido no endpoint <code>/episodes</code></td></tr>
-        </tbody>
-      </table>
-
-      <div class="code-block"><code>GET ${base}/api/episode-video?episode_id=40930</code></div>
-    </section>
-
-    <section id="lancamentos" style="margin-top: 3.5rem;">
+    <section id="lancamentos" style="margin-top:3.5rem;">
       <h2 class="section-title">Lançamentos</h2>
-      <p class="text-large">
-        Lista episódios recentes com paginação e limite. <strong>Único endpoint que aceita limite</strong>.
-      </p>
-
+      <p class="text-large"><strong>Único endpoint que aceita</strong> <code>limite</code>. Paginação via <code>pagina</code>.</p>
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
           <span class="endpoint-path">/api/lancamentos?pagina=1&limite=20</span>
           <div class="endpoint-actions">
-            <a class="btn" href="${base}/api/lancamentos?pagina=1&limite=20" target="_blank" rel="noreferrer">teste</a>
+            <a class="btn" href="${base}/api/lancamentos?pagina=1&limite=20" target="_blank" rel="noreferrer">abrir</a>
             <button class="btn" data-copy="${base}/api/lancamentos?pagina=1&limite=20">copiar</button>
           </div>
         </div>
         <div class="endpoint-description">Parâmetros opcionais: <code>pagina</code> e <code>limite</code>.</div>
       </div>
-
       <table class="params-table">
         <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
         <tbody>
@@ -879,53 +790,39 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="sinopse" style="margin-top: 3.5rem;">
+    <section id="sinopse" style="margin-top:3.5rem;">
       <h2 class="section-title">Sinopse</h2>
-      <p class="text-large">Busca título e sinopse do anime via <code>nome</code>.</p>
+      <p class="text-large">Busca sinopse via <code>nome</code>.</p>
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
           <span class="endpoint-path">/api/sinopse?nome=Overlord-4-Dublado</span>
           <div class="endpoint-actions">
-            <a class="btn" href="${base}/api/sinopse?nome=Overlord-4-Dublado" target="_blank" rel="noreferrer">teste</a>
+            <a class="btn" href="${base}/api/sinopse?nome=Overlord-4-Dublado" target="_blank" rel="noreferrer">abrir</a>
             <button class="btn" data-copy="${base}/api/sinopse?nome=Overlord-4-Dublado">copiar</button>
           </div>
         </div>
         <div class="endpoint-description">Parâmetro obrigatório: <code>nome</code>.</div>
       </div>
-
-      <table class="params-table">
-        <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
-        <tbody>
-          <tr><td>nome <span class="param-required">obrigatório</span></td><td>string</td><td>Nome/slug do anime</td></tr>
-        </tbody>
-      </table>
     </section>
 
-    <section id="generos" style="margin-top: 3.5rem;">
+    <section id="generos" style="margin-top:3.5rem;">
       <h2 class="section-title">Gêneros</h2>
-      <p class="text-large">Lista animes por gênero.</p>
+      <p class="text-large">Lista por gênero via <code>genero</code>.</p>
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
           <span class="endpoint-path">/api/generos?genero=acao</span>
           <div class="endpoint-actions">
-            <a class="btn" href="${base}/api/generos?genero=acao" target="_blank" rel="noreferrer">teste</a>
+            <a class="btn" href="${base}/api/generos?genero=acao" target="_blank" rel="noreferrer">abrir</a>
             <button class="btn" data-copy="${base}/api/generos?genero=acao">copiar</button>
           </div>
         </div>
         <div class="endpoint-description">Parâmetro obrigatório: <code>genero</code>.</div>
       </div>
-
-      <table class="params-table">
-        <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
-        <tbody>
-          <tr><td>genero <span class="param-required">obrigatório</span></td><td>string</td><td>Slug do gênero (ex: acao)</td></tr>
-        </tbody>
-      </table>
     </section>
 
-    <section id="respostas" style="margin-top: 3.5rem;">
+    <section id="respostas" style="margin-top:3.5rem;">
       <h2 class="section-title">Respostas</h2>
       <div class="code-block"><code>{
   "sucesso": true,
@@ -933,7 +830,7 @@ module.exports = async (req, res) => {
 }</code></div>
     </section>
 
-    <section id="erros" style="margin-top: 3.5rem;">
+    <section id="erros" style="margin-top:3.5rem;">
       <h2 class="section-title">Erros</h2>
       <table class="params-table">
         <thead><tr><th>Status</th><th>Quando acontece</th><th>Como resolver</th></tr></thead>
@@ -945,18 +842,16 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="changelog" style="margin-top: 3.5rem;">
+    <section id="changelog" style="margin-top:3.5rem;">
       <h2 class="section-title">Changelog</h2>
       <div class="endpoint-card">
         <div class="endpoint-description">
-          <strong>v4</strong> • tema claro/escuro + mobile drawer.<br>
-          <strong>v3</strong> • docs interativa.<br>
+          <strong>v4</strong> • tema claro/escuro + mobile drawer + hash fix.<br>
           <strong>v2</strong> • lançamentos com paginação/limite.<br>
           <strong>v1</strong> • search / episodes / episode-video.
         </div>
       </div>
     </section>
-
   </main>
 </div>
 
@@ -965,4 +860,138 @@ module.exports = async (req, res) => {
     <a href="${base}/api/intro">docs</a> ·
     <a href="${base}/api/search?keyword=overlord">search</a> ·
     <a href="${base}/api/lancamentos?pagina=1&limite=20">lancamentos</a> ·
-    <a href="${base}/api/generos
+    <a href="${base}/api/generos?genero=acao">generos</a> ·
+    <a href="${discordUserUrl}" target="_blank" rel="noreferrer">discord</a>
+  </div>
+  <div style="margin-top:1.5rem;">
+    © 2026 anime api · developer by <strong>Lopes</strong> · <strong>dvhackzzz</strong>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  const themeBtnMobile = document.getElementById('themeBtnMobile');
+  const themeBtnDrawer = document.getElementById('themeBtnDrawer');
+
+  function setTheme(next){
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('anime_api_theme', next);
+    const isDark = next === 'dark';
+    const label = isDark ? 'modo padrão' : 'modo escuro';
+    if(themeBtn) themeBtn.textContent = label;
+    if(themeBtnMobile) themeBtnMobile.textContent = label;
+    if(themeBtnDrawer) themeBtnDrawer.textContent = label;
+  }
+
+  const saved = localStorage.getItem('anime_api_theme');
+  if(saved === 'dark' || saved === 'light') setTheme(saved);
+  else setTheme('light');
+
+  function toggleTheme(){
+    const current = root.getAttribute('data-theme') || 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  }
+  [themeBtn, themeBtnMobile, themeBtnDrawer].forEach(b => b && b.addEventListener('click', toggleTheme));
+
+  async function copyText(text, btn){
+    const old = btn.textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+      btn.textContent = 'copiado';
+      setTimeout(()=>btn.textContent = old, 900);
+    }catch{
+      btn.textContent = 'erro';
+      setTimeout(()=>btn.textContent = old, 900);
+    }
+  }
+
+  const copyBase = document.getElementById('copyBase');
+  const basecode = document.getElementById('basecode');
+  if(copyBase && basecode) copyBase.addEventListener('click', ()=>copyText(basecode.textContent.trim(), copyBase));
+
+  const copyBaseMobile = document.getElementById('copyBaseMobile');
+  if(copyBaseMobile) copyBaseMobile.addEventListener('click', ()=>copyText('${base}', copyBaseMobile));
+
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    btn.addEventListener('click', ()=>copyText(btn.getAttribute('data-copy')||'', btn));
+  });
+
+  // active link
+  const navLinks = Array.from(document.querySelectorAll('.sidebar-nav-link'));
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  function setActive(hash){
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+  }
+
+  navLinks.forEach(a => {
+    a.addEventListener('click', (e)=>{
+      const href = a.getAttribute('href');
+      if(!href || href[0] !== '#') return;
+      const el = document.querySelector(href);
+      if(!el) return;
+      e.preventDefault();
+      history.pushState(null, '', href);
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+      setActive(href);
+      closeDrawer();
+    });
+  });
+
+  const io = new IntersectionObserver((entries)=>{
+    const visible = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(visible && visible.target && visible.target.id){
+      const hash = '#' + visible.target.id;
+      setActive(hash);
+      if(location.hash !== hash) history.replaceState(null, '', hash);
+    }
+  }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.1,0.2,0.35,0.5,0.65] });
+  sections.forEach(s=>io.observe(s));
+
+  // drawer
+  const drawer = document.getElementById('drawer');
+  const backdrop = document.getElementById('backdrop');
+  const openMenu = document.getElementById('openMenu');
+  const closeMenuBtn = document.getElementById('closeMenu');
+
+  function openDrawer(){
+    if(!drawer || !backdrop) return;
+    drawer.style.display = 'block';
+    backdrop.style.display = 'block';
+  }
+  function closeDrawer(){
+    if(!drawer || !backdrop) return;
+    drawer.style.display = 'none';
+    backdrop.style.display = 'none';
+  }
+  if(openMenu) openMenu.addEventListener('click', openDrawer);
+  if(closeMenuBtn) closeMenuBtn.addEventListener('click', closeDrawer);
+  if(backdrop) backdrop.addEventListener('click', closeDrawer);
+
+  // hash jump FIX (abre direto no #search etc)
+  (function jumpToHashOnLoad(){
+    const go = () => {
+      const h = location.hash;
+      if (!h) return;
+      const el = document.querySelector(h);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActive(h);
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => setTimeout(go, 50));
+    } else {
+      setTimeout(go, 50);
+    }
+    window.addEventListener("hashchange", go);
+  })();
+
+})();
+</script>
+
+</body>
+</html>`;
+
+  return res.status(200).end(html);
+};
