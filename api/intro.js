@@ -19,32 +19,36 @@ module.exports = async (req, res) => {
     --bg:#f6f7fb;
     --text:#0f172a;
     --muted:#526078;
+
     --card:#ffffff;
     --card2:#fbfcff;
+
     --line:#e6ebf3;
     --line2:#eef2f8;
+
     --shadow: 0 20px 40px -22px rgba(15,23,42,0.12);
     --shadow2: 0 15px 35px -20px rgba(15,23,42,0.10);
-
-    --codeBg:#0b1220;
-    --codeText:#eaf1ff;
-    --codeBorder:#1a2740;
 
     --accent:#0f172a;
     --accentSoft:#f1f5ff;
     --accentBorder:#dbe6ff;
 
-    --methodBg:#0f172a;
-    --methodText:#ffffff;
-    --methodBorder:rgba(15,23,42,.25);
+    --methodBg:#eef2ff;
+    --methodText:#0f172a;
+    --methodBorder:#d9e2ff;
 
     --btnBg:#ffffff;
     --btnBorder:#d7e2ec;
     --btnHover:#f3f6ff;
 
+    /* code claro */
+    --codeBg:#f3f6ff;
+    --codeText:#0f172a;
+    --codeBorder:#dbe6ff;
+    --codeInlineBg:#eef3ff;
+
     --radiusSide:18px;
     --radiusMain:26px;
-    --radiusSoft:14px;
 
     --h1: clamp(1.25rem, 1.05rem + 0.9vw, 1.55rem);
     --p: clamp(.92rem, .88rem + .2vw, 1rem);
@@ -62,6 +66,14 @@ module.exports = async (req, res) => {
     -webkit-font-smoothing:antialiased;
     padding:1.25rem;
     font-size:var(--p);
+  }
+  code{
+    font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
+    font-size:.92em;
+    background:var(--codeInlineBg);
+    padding:.12rem .35rem;
+    border-radius:8px;
+    border:1px solid rgba(15,23,42,.08);
   }
 
   .container{
@@ -349,7 +361,7 @@ module.exports = async (req, res) => {
     gap:.35rem;
     padding:.45rem;
     border-bottom:1px solid var(--line);
-    background:rgba(241,245,255,.55);
+    background:rgba(241,245,255,.65);
   }
   .tabBtn{
     border:1px solid var(--btnBorder);
@@ -364,8 +376,8 @@ module.exports = async (req, res) => {
   }
   .tabBtn:hover{ background:var(--btnHover); }
   .tabBtn.active{
-    background:var(--text);
-    border-color:var(--text);
+    background:#0f172a;
+    border-color:#0f172a;
     color:#fff;
   }
   .tabPane{ display:none; }
@@ -374,13 +386,19 @@ module.exports = async (req, res) => {
   .code-block{
     background:var(--codeBg);
     color:var(--codeText);
-    padding:1rem;
+    padding:.95rem;
     font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
     font-size:var(--mono);
     overflow-x:auto;
-    border-top:1px solid rgba(255,255,255,0.08);
+    border-top:1px solid rgba(15,23,42,0.08);
   }
-  .code-block code{color:rgba(234,241,255,.95)}
+  .code-block code{
+    background:transparent;
+    border:none;
+    padding:0;
+    border-radius:0;
+    font-size:1em;
+  }
 
   .profile{
     margin-top:1rem;
@@ -910,8 +928,7 @@ module.exports = async (req, res) => {
       <h2 class="section-title">Changelog</h2>
       <div class="endpoint-card">
         <div class="endpoint-description">
-          <strong>v5</strong> • tema claro sem modo escuro + layout mais compacto + tabs de código.<br>
-          <strong>v4</strong> • docs com navegação + hash fix.
+          <strong>v5</strong> • tema claro + code blocks claros + tabs claras + layout mais compacto.
         </div>
       </div>
     </section>
