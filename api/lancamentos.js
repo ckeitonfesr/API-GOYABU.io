@@ -7,7 +7,7 @@ async function getTotalPaginas() {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
       },
-      timeout: 10000
+      timeout: 5000
     });
 
     const $ = cheerio.load(data);
@@ -37,7 +37,8 @@ async function getTotalPaginas() {
 }
 
 module.exports = async (req, res) => {
-  const { pagina = 1 } = req.query;
+  
+  const { pagina = 1, limite = 20 } = req.query;
   
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Content-Type', 'application/json');
@@ -55,12 +56,10 @@ module.exports = async (req, res) => {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
       },
-      timeout: 15000
+      timeout: 8000 // reduzido
     });
 
     const $ = cheerio.load(data);
-    
-    // NÃO verificar 404 aqui, pois páginas antigas podem não retornar 404
     const episodios = [];
     
     $('.boxEP.grid-view, article.boxEP').each((i, el) => {
@@ -90,22 +89,24 @@ module.exports = async (req, res) => {
       }
     });
 
+    const episodiosLimitados = episodios.slice(0, parseInt(limite));
+
     return res.status(200).json({
       sucesso: true,
       pagina: parseInt(pagina),
       total_paginas: global.totalPaginas,
-      total_episodios: episodios.length,
-      dados: episodios
+      total_disponivel: episodios.length,
+      total_retornado: episodiosLimitados.length,
+      limite: parseInt(limite),
+      dados: episodiosLimitados
     });
 
   } catch (error) {
-    // Mesmo com erro, tenta retornar algo útil
     return res.status(200).json({
       sucesso: true,
       pagina: parseInt(pagina),
       total_paginas: global.totalPaginas || 1571,
       total_episodios: 0,
-      mensagem: "Erro ao acessar página, mas página existe no índice",
       dados: []
     });
   }
