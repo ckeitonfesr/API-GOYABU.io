@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const discordUserUrl = "https://discord.com/users/1295419742475255933";
 
   const html = `<!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,61 +16,40 @@ module.exports = async (req, res) => {
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f5f7fb;
-    --text:#111827;
-    --muted:#6b7a8f;
+    --bg:#f6f7fb;
+    --text:#0f172a;
+    --muted:#526078;
     --card:#ffffff;
-    --card2:#f9fcff;
-    --line:#e2eaf2;
-    --line2:#edf2f9;
-    --shadow: 0 20px 40px -20px rgba(0,20,40,0.12);
-    --shadow2: 0 15px 35px -15px rgba(0,10,30,0.08);
-    --codeBg:#0c121c;
-    --codeText:#deecff;
-    --codeBorder:#1e2a3a;
-    --accent:#111827;
-    --accentSoft:#eef2ff;
+    --card2:#fbfcff;
+    --line:#e6ebf3;
+    --line2:#eef2f8;
+    --shadow: 0 20px 40px -22px rgba(15,23,42,0.12);
+    --shadow2: 0 15px 35px -20px rgba(15,23,42,0.10);
+
+    --codeBg:#0b1220;
+    --codeText:#eaf1ff;
+    --codeBorder:#1a2740;
+
+    --accent:#0f172a;
+    --accentSoft:#f1f5ff;
     --accentBorder:#dbe6ff;
-    --methodBg:#0b1e33;
-    --methodBorder:#1e3a5f;
+
+    --methodBg:#0f172a;
+    --methodText:#ffffff;
+    --methodBorder:rgba(15,23,42,.25);
+
     --btnBg:#ffffff;
     --btnBorder:#d7e2ec;
-    --btnHover:#f0f4fe;
-    --radiusSide:20px;
-    --radiusMain:32px;
-    --radiusSoft:16px;
+    --btnHover:#f3f6ff;
 
-    --h1: clamp(1.35rem, 1.05rem + 1.1vw, 1.85rem);
-    --h2: clamp(1.05rem, .95rem + .6vw, 1.25rem);
-    --p: clamp(.92rem, .88rem + .25vw, 1.02rem);
-    --small: clamp(.78rem, .76rem + .15vw, .88rem);
-    --mono: clamp(.84rem, .80rem + .2vw, .95rem);
-  }
+    --radiusSide:18px;
+    --radiusMain:26px;
+    --radiusSoft:14px;
 
-  [data-theme="dark"]{
-    --bg:#05060A;
-    --text:#EDEFF6;
-    --muted:rgba(237,239,246,.70);
-    --card:#0A0C11;
-    --card2:#0D1017;
-    --line:rgba(255,255,255,.10);
-    --line2:rgba(255,255,255,.08);
-    --shadow: 0 28px 70px -35px rgba(0,0,0,.70);
-    --shadow2: 0 22px 50px -30px rgba(0,0,0,.68);
-    --codeBg:#07080C;
-    --codeText:#E7EAF2;
-    --codeBorder:rgba(255,255,255,.12);
-
-    --accent:#EDEFF6;
-    --accentSoft:rgba(255,255,255,.06);
-    --accentBorder:rgba(255,255,255,.12);
-
-    --methodBg:#0C0F16;
-    --methodBorder:rgba(255,255,255,.14);
-
-    --btnBg:rgba(255,255,255,.05);
-    --btnBorder:rgba(255,255,255,.12);
-    --btnHover:rgba(255,255,255,.09);
+    --h1: clamp(1.25rem, 1.05rem + 0.9vw, 1.55rem);
+    --p: clamp(.92rem, .88rem + .2vw, 1rem);
+    --small: clamp(.78rem, .76rem + .12vw, .86rem);
+    --mono: clamp(.84rem, .81rem + .16vw, .92rem);
   }
 
   *{margin:0;padding:0;box-sizing:border-box}
@@ -81,51 +60,50 @@ module.exports = async (req, res) => {
     color:var(--text);
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
-    padding:2rem;
+    padding:1.25rem;
     font-size:var(--p);
   }
 
   .container{
-    max-width:1400px;
+    max-width:1280px;
     margin:0 auto;
     display:grid;
-    grid-template-columns:260px 1fr;
-    gap:2rem;
+    grid-template-columns:250px 1fr;
+    gap:1.25rem;
     align-items:start;
   }
 
   .sidebar{
     background:var(--card);
     border-radius:var(--radiusSide);
-    padding:2rem 1.25rem;
+    padding:1.2rem 1rem;
     box-shadow:var(--shadow2);
     height:fit-content;
     position:sticky;
-    top:2rem;
-    border:1px solid rgba(0,0,0,0.02);
+    top:1.25rem;
+    border:1px solid var(--line);
   }
-  [data-theme="dark"] .sidebar{ border-color: var(--line); }
 
   .topbar{
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:space-between;
     gap:.75rem;
-    padding:0 .75rem 1.25rem;
-    margin-bottom:1.25rem;
+    padding:0 .25rem 1rem;
+    margin-bottom:.9rem;
     border-bottom:1px solid var(--line2);
   }
 
   .brand{
     display:flex;
     flex-direction:column;
-    gap:.45rem;
+    gap:.35rem;
     min-width:0;
   }
   .brand .title{
-    font-weight:900;
+    font-weight:850;
     letter-spacing:-0.02em;
-    font-size:1.02rem;
+    font-size:1rem;
     display:flex;
     align-items:center;
     gap:.5rem;
@@ -134,7 +112,7 @@ module.exports = async (req, res) => {
   .pill{
     font-size:.70rem;
     font-weight:800;
-    padding:.20rem .58rem;
+    padding:.18rem .55rem;
     border-radius:999px;
     background:var(--accentSoft);
     color:var(--accent);
@@ -147,13 +125,13 @@ module.exports = async (req, res) => {
     line-height:1.35;
   }
 
-  .themeBtn, .copybtn, .btn, .menuBtn{
+  .copybtn, .btn, .menuBtn{
     border:1px solid var(--btnBorder);
     background:var(--btnBg);
     color:var(--text);
     font-weight:800;
     font-size:.78rem;
-    padding:.55rem .7rem;
+    padding:.5rem .65rem;
     border-radius:12px;
     cursor:pointer;
     transition:.15s;
@@ -163,11 +141,11 @@ module.exports = async (req, res) => {
     white-space:nowrap;
     text-decoration:none;
   }
-  .themeBtn:hover, .copybtn:hover, .btn:hover, .menuBtn:hover{ background:var(--btnHover); }
-  .themeBtn:active, .copybtn:active, .btn:active, .menuBtn:active{ transform:translateY(1px); }
+  .copybtn:hover, .btn:hover, .menuBtn:hover{ background:var(--btnHover); }
+  .copybtn:active, .btn:active, .menuBtn:active{ transform:translateY(1px); }
 
   .baseRow{
-    margin:1rem .75rem 0;
+    margin:.85rem .25rem 0;
     display:flex;
     gap:.55rem;
     align-items:center;
@@ -177,7 +155,7 @@ module.exports = async (req, res) => {
     font-size:.78rem;
     background:var(--codeBg);
     color:var(--codeText);
-    padding:.5rem .65rem;
+    padding:.45rem .6rem;
     border-radius:12px;
     border:1px solid var(--codeBorder);
     overflow:hidden;
@@ -187,100 +165,92 @@ module.exports = async (req, res) => {
     min-width:0;
   }
 
-  .sidebar-section{margin-top:1.5rem}
+  .sidebar-section{margin-top:1.05rem}
   .sidebar-section-title{
     font-size:.68rem;
-    font-weight:700;
+    font-weight:800;
     text-transform:uppercase;
     letter-spacing:0.08em;
     color:var(--muted);
-    margin-bottom:1rem;
-    padding-left:0.75rem;
+    margin-bottom:.7rem;
+    padding-left:.25rem;
   }
   .sidebar-nav{list-style:none}
-  .sidebar-nav-item{margin-bottom:0.2rem}
+  .sidebar-nav-item{margin-bottom:.15rem}
   .sidebar-nav-link{
     display:block;
-    padding:0.58rem 0.75rem;
+    padding:.52rem .65rem;
     color:var(--text);
     text-decoration:none;
     font-size:.90rem;
-    font-weight:600;
+    font-weight:650;
     border-radius:12px;
     transition:all 0.15s ease;
     border-left:2px solid transparent;
-    opacity:.86;
+    opacity:.90;
   }
   .sidebar-nav-link:hover{
     background:var(--btnHover);
-    border-left-color:rgba(255,255,255,.35);
+    border-left-color:rgba(15,23,42,.35);
     opacity:1;
   }
   .sidebar-nav-link.active{
     background:var(--btnHover);
-    border-left-color:rgba(255,255,255,.35);
+    border-left-color:rgba(15,23,42,.35);
     opacity:1;
   }
 
   .content{
     background:var(--card);
     border-radius:var(--radiusMain);
-    padding:2.6rem;
+    padding:1.85rem;
     box-shadow:var(--shadow);
-    border:1px solid rgba(0,0,0,0.02);
+    border:1px solid var(--line);
   }
-  [data-theme="dark"] .content{ border-color: var(--line); }
 
   .section-title{
     font-size:var(--h1);
-    font-weight:850;
+    font-weight:900;
     letter-spacing:-0.02em;
-    margin-bottom:1.25rem;
+    margin-bottom:1rem;
     color:var(--text);
     border-bottom:1px solid var(--line2);
-    padding-bottom:.75rem;
+    padding-bottom:.65rem;
   }
-  .subsection-title{
-    font-size:var(--h2);
-    font-weight:850;
-    margin:2.2rem 0 1rem 0;
-    color:var(--text);
-    letter-spacing:-0.01em;
-  }
+
   .text-large{
     font-size:var(--p);
     color:var(--muted);
-    margin-bottom:1.25rem;
+    margin-bottom:.95rem;
   }
 
   .endpoint-card{
     background:var(--card2);
-    border-radius:20px;
-    padding:1.35rem;
-    margin:1.35rem 0;
+    border-radius:18px;
+    padding:1.05rem;
+    margin:1rem 0;
     border:1px solid var(--line);
-    transition:all 0.2s;
+    transition:all 0.15s;
   }
   .endpoint-card:hover{
-    border-color:rgba(255,255,255,.18);
     background:var(--card);
-    box-shadow:0 10px 25px -18px rgba(0,0,0,.35);
+    box-shadow:0 10px 22px -18px rgba(15,23,42,.22);
   }
 
   .endpoint-head{
     display:flex;
     align-items:center;
-    gap:.75rem;
+    gap:.65rem;
     flex-wrap:wrap;
   }
   .endpoint-method{
     display:inline-block;
     font-weight:900;
     font-size:.68rem;
-    padding:0.22rem 0.85rem;
-    border-radius:30px;
+    padding:0.2rem 0.75rem;
+    border-radius:999px;
     background:var(--methodBg);
-    color:var(--text);
+    color:var(--methodText);
     letter-spacing:0.08em;
     text-transform:uppercase;
     border:1px solid var(--methodBorder);
@@ -289,47 +259,33 @@ module.exports = async (req, res) => {
     font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
     font-size:var(--mono);
     color:var(--text);
-    font-weight:800;
+    font-weight:900;
     word-break:break-word;
   }
   .endpoint-actions{
     margin-left:auto;
     display:flex;
-    gap:.5rem;
+    gap:.45rem;
     flex-wrap:wrap;
   }
   .endpoint-description{
-    margin:.75rem 0 0 0;
+    margin:.6rem 0 0 0;
     color:var(--muted);
     font-size:var(--p);
   }
 
-  .code-block{
-    background:var(--codeBg);
-    color:var(--codeText);
-    padding:1.1rem;
-    border-radius:18px;
-    font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
-    font-size:var(--mono);
-    overflow-x:auto;
-    margin:1.35rem 0;
-    border:1px solid var(--codeBorder);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
-  }
-  .code-block code{color:rgba(231,234,242,.92)}
-
   .params-table{
     width:100%;
     border-collapse:collapse;
-    margin:1.35rem 0;
+    margin:1rem 0;
     font-size:var(--p);
-    border-radius:16px;
+    border-radius:14px;
     overflow:hidden;
     border:1px solid var(--line);
   }
   .params-table th{
     text-align:left;
-    padding:0.85rem 1.1rem;
+    padding:0.75rem 0.95rem;
     background:var(--accentSoft);
     border-bottom:1px solid var(--line);
     color:var(--text);
@@ -339,36 +295,36 @@ module.exports = async (req, res) => {
     letter-spacing:0.08em;
   }
   .params-table td{
-    padding:0.85rem 1.1rem;
+    padding:0.75rem 0.95rem;
     border-bottom:1px solid var(--line);
     color:var(--muted);
     vertical-align:top;
   }
   .params-table tr:last-child td{border-bottom:none}
   .param-required{
-    color:#ff4d6d;
+    color:#b4233b;
     font-size:.68rem;
     font-weight:900;
-    margin-left:0.5rem;
-    background:rgba(255,77,109,.12);
+    margin-left:.45rem;
+    background:rgba(180,35,59,.10);
     padding:0.12rem 0.5rem;
-    border-radius:30px;
+    border-radius:999px;
     display:inline-block;
-    border:1px solid rgba(255,77,109,.22);
+    border:1px solid rgba(180,35,59,.20);
   }
 
   .tip-box{
     background:var(--accentSoft);
-    border-radius:16px;
-    padding:1.15rem;
-    margin:1.15rem 0;
+    border-radius:14px;
+    padding:1rem;
+    margin:1rem 0;
     border:1px solid var(--accentBorder);
   }
   .tip-box strong{
     color:var(--text);
     display:block;
-    margin-bottom:0.3rem;
-    font-size:1rem;
+    margin-bottom:.25rem;
+    font-size:.98rem;
     font-weight:900;
   }
   .tip-box p{color:var(--muted); font-size:var(--p)}
@@ -379,67 +335,77 @@ module.exports = async (req, res) => {
     border-bottom:1px solid transparent;
     transition:border 0.1s;
   }
-  .tip-box a:hover{border-bottom-color:rgba(255,255,255,.35)}
+  .tip-box a:hover{border-bottom-color:rgba(15,23,42,.35)}
 
-  .grid-2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1.15rem;
-    margin:1.15rem 0;
-  }
-  .mini{
-    background:var(--card);
+  .codeTabs{
     border:1px solid var(--line);
-    border-radius:18px;
-    padding:1.1rem;
+    border-radius:14px;
+    overflow:hidden;
+    margin:1rem 0;
+    background:var(--card);
   }
-  .tag{
-    display:inline-flex;
-    align-items:center;
-    gap:.4rem;
-    padding:.25rem .6rem;
-    border-radius:999px;
-    font-size:.72rem;
-    font-weight:900;
-    background:var(--accentSoft);
-    border:1px solid var(--accentBorder);
+  .tabBar{
+    display:flex;
+    gap:.35rem;
+    padding:.45rem;
+    border-bottom:1px solid var(--line);
+    background:rgba(241,245,255,.55);
+  }
+  .tabBtn{
+    border:1px solid var(--btnBorder);
+    background:var(--btnBg);
     color:var(--text);
+    font-weight:900;
+    font-size:.76rem;
+    padding:.42rem .62rem;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.12s;
   }
+  .tabBtn:hover{ background:var(--btnHover); }
+  .tabBtn.active{
+    background:var(--text);
+    border-color:var(--text);
+    color:#fff;
+  }
+  .tabPane{ display:none; }
+  .tabPane.active{ display:block; }
+
+  .code-block{
+    background:var(--codeBg);
+    color:var(--codeText);
+    padding:1rem;
+    font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
+    font-size:var(--mono);
+    overflow-x:auto;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .code-block code{color:rgba(234,241,255,.95)}
 
   .profile{
-    margin-top:1.25rem;
-    padding:1rem .75rem 0;
+    margin-top:1rem;
+    padding:1rem .25rem 0;
     border-top:1px solid var(--line2);
   }
   .profileCard{
     display:flex;
-    gap:.85rem;
+    gap:.8rem;
     align-items:center;
-    padding:.85rem;
-    border-radius:16px;
+    padding:.8rem;
+    border-radius:14px;
     border:1px solid var(--line);
-    background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.00));
+    background:linear-gradient(180deg, rgba(15,23,42,0.02), rgba(15,23,42,0.00));
   }
   .avatar{
-    width:46px;height:46px;border-radius:50%;
-    border:1px solid rgba(255,255,255,.18);
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid rgba(15,23,42,.12);
     object-fit:cover;
     background:#000;
   }
   .pmeta{min-width:0}
-  .pname{
-    font-weight:900;
-    letter-spacing:-0.02em;
-    line-height:1.1;
-  }
-  .puser{
-    color:var(--muted);
-    font-size:.85rem;
-    margin-top:.15rem;
-    display:flex;
-    align-items:center;
-    gap:.45rem;
-  }
+  .pname{ font-weight:900; letter-spacing:-0.02em; line-height:1.1; }
+  .puser{ color:var(--muted); font-size:.85rem; margin-top:.1rem; }
+
   .plink{
     margin-left:auto;
     font-weight:900;
@@ -457,9 +423,8 @@ module.exports = async (req, res) => {
   }
   .plink:hover{background:var(--btnHover)}
 
-  /* NOVO: botão do discord embaixo (só PC) */
   .plinkBelow{
-    margin-top:.6rem;
+    margin-top:.55rem;
     width:100%;
     display:none;
     padding:.7rem .85rem;
@@ -476,9 +441,9 @@ module.exports = async (req, res) => {
   .plinkBelow:hover{ background:var(--btnHover); }
 
   .footer{
-    max-width:1400px;
-    margin:2rem auto 0;
-    padding:2rem 0 0;
+    max-width:1280px;
+    margin:1.25rem auto 0;
+    padding:1.25rem 0 0;
     color:var(--muted);
     font-size:0.85rem;
     text-align:center;
@@ -487,29 +452,25 @@ module.exports = async (req, res) => {
   .footer a{
     color:var(--text);
     text-decoration:none;
-    margin:0 .75rem;
-    font-weight:800;
-    opacity:.88;
+    margin:0 .6rem;
+    font-weight:850;
+    opacity:.86;
   }
   .footer a:hover{opacity:1}
 
-  /* MOBILE */
   .mobileBar{
     display:none;
     position:sticky;
     top:0;
     z-index:50;
-    background:rgba(245,247,251,.85);
+    background:rgba(246,247,251,.92);
     backdrop-filter: blur(10px);
     border-bottom:1px solid var(--line);
-    padding:.8rem 1rem;
-    margin:-2rem -2rem 1rem;
-  }
-  [data-theme="dark"] .mobileBar{
-    background:rgba(5,6,10,.80);
+    padding:.7rem .9rem;
+    margin:-1.25rem -1.25rem .9rem;
   }
   .mobileBarInner{
-    max-width:1400px;
+    max-width:1280px;
     margin:0 auto;
     display:flex;
     align-items:center;
@@ -545,7 +506,7 @@ module.exports = async (req, res) => {
     width:min(86vw, 340px);
     background:var(--card);
     z-index:70;
-    padding:1.25rem;
+    padding:1rem;
     border-right:1px solid var(--line);
     box-shadow: 20px 0 60px rgba(0,0,0,.25);
     overflow:auto;
@@ -555,27 +516,19 @@ module.exports = async (req, res) => {
     align-items:center;
     justify-content:space-between;
     gap:.75rem;
-    margin-bottom:1rem;
+    margin-bottom:.8rem;
   }
 
   @media (max-width: 900px){
     body{ padding:1rem; }
-    .mobileBar{ display:block; margin:-1rem -1rem 1rem; }
+    .mobileBar{ display:block; margin:-1rem -1rem .9rem; }
     .container{ grid-template-columns:1fr; }
     .sidebar{ display:none; }
-    .content{ padding:1.5rem; border-radius:22px; }
-    .grid-2{ grid-template-columns:1fr; }
+    .content{ padding:1.25rem; border-radius:20px; }
     .endpoint-actions{ width:100%; margin-left:0; }
+    .plinkBelow{ display:none !important; }
   }
 
-  @media (max-width: 420px){
-    .content{ padding:1.15rem; }
-    .endpoint-card{ padding:1.05rem; }
-    .code-block{ padding:1rem; }
-    .params-table th, .params-table td{ padding:.75rem .85rem; }
-  }
-
-  /* PC: move discord pra baixo do perfil (desktop) */
   @media (min-width: 901px){
     .sidebar .profileCard .plink{ display:none; }
     .sidebar .plinkBelow{ display:block; }
@@ -590,7 +543,6 @@ module.exports = async (req, res) => {
       <button class="menuBtn" id="openMenu">menu</button>
       <span>Anime API <span class="pill">docs</span></span>
     </div>
-    <button class="themeBtn" id="themeBtnMobile">modo claro</button>
   </div>
 </div>
 
@@ -604,9 +556,8 @@ module.exports = async (req, res) => {
   <div class="tip-box" style="margin-top:0;">
     <strong>Base URL</strong>
     <p><code>${base}</code></p>
-    <div style="margin-top:.8rem; display:flex; gap:.55rem;">
+    <div style="margin-top:.65rem; display:flex; gap:.55rem;">
       <button class="copybtn" id="copyBaseMobile">copiar</button>
-      <button class="themeBtn" id="themeBtnDrawer">modo claro</button>
     </div>
   </div>
 
@@ -615,7 +566,6 @@ module.exports = async (req, res) => {
     <ul class="sidebar-nav">
       <li class="sidebar-nav-item"><a href="#introducao" class="sidebar-nav-link active">Introdução</a></li>
       <li class="sidebar-nav-item"><a href="#fluxo" class="sidebar-nav-link">Fluxo (nome → vídeo)</a></li>
-      <li class="sidebar-nav-item"><a href="#boaspraticas" class="sidebar-nav-link">Boas práticas</a></li>
     </ul>
   </div>
 
@@ -660,12 +610,24 @@ module.exports = async (req, res) => {
         <div class="title">Anime API <span class="pill">docs</span></div>
         <div class="meta">Busca animes, episódios, lançamentos e link de vídeo.</div>
       </div>
-      <button class="themeBtn" id="themeBtn">modo claro</button>
     </div>
 
-    <div class="baseRow">
-      <div class="basecode" id="basecode">${base}</div>
-      <button class="copybtn" id="copyBase">copiar</button>
+    <div class="codeTabs" data-tabs>
+      <div class="tabBar">
+        <button class="tabBtn active" data-tab="baseTab">base url</button>
+        <button class="tabBtn" data-tab="baseFetch">fetch</button>
+      </div>
+      <div class="tabPane active" id="baseTab">
+        <div class="baseRow" style="margin:.75rem;">
+          <div class="basecode" id="basecode">${base}</div>
+          <button class="copybtn" id="copyBase">copiar</button>
+        </div>
+      </div>
+      <div class="tabPane" id="baseFetch">
+        <div class="code-block"><code>fetch("${base}/api/search?keyword=overlord")
+  .then(r =&gt; r.json())
+  .then(console.log);</code></div>
+      </div>
     </div>
 
     <div class="sidebar-section">
@@ -673,7 +635,6 @@ module.exports = async (req, res) => {
       <ul class="sidebar-nav">
         <li class="sidebar-nav-item"><a href="#introducao" class="sidebar-nav-link active">Introdução</a></li>
         <li class="sidebar-nav-item"><a href="#fluxo" class="sidebar-nav-link">Fluxo (nome → vídeo)</a></li>
-        <li class="sidebar-nav-item"><a href="#boaspraticas" class="sidebar-nav-link">Boas práticas</a></li>
       </ul>
     </div>
 
@@ -728,16 +689,17 @@ module.exports = async (req, res) => {
       </div>
     </section>
 
-    <section id="fluxo" style="margin-top:3rem;">
+    <section id="fluxo" style="margin-top:2.1rem;">
       <h2 class="section-title">Fluxo (nome → vídeo)</h2>
       <p class="text-large">
         Ordem: <strong>Nome</strong> → <strong>anime_id</strong> → <strong>episodes</strong> → <strong>episode_id</strong> → <strong>video_url</strong>.
       </p>
     </section>
 
-    <section id="search" style="margin-top:3rem;">
+    <section id="search" style="margin-top:2.1rem;">
       <h2 class="section-title">Search</h2>
       <p class="text-large">Busca por palavra-chave. Parâmetro obrigatório: <code>keyword</code>.</p>
+
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -749,6 +711,22 @@ module.exports = async (req, res) => {
         </div>
         <div class="endpoint-description">Retorna itens com <strong>id</strong> (anime_id) e <strong>dublado</strong> (true/false).</div>
       </div>
+
+      <div class="codeTabs" data-tabs>
+        <div class="tabBar">
+          <button class="tabBtn active" data-tab="sCurl">cURL</button>
+          <button class="tabBtn" data-tab="sFetch">fetch</button>
+        </div>
+        <div class="tabPane active" id="sCurl">
+          <div class="code-block"><code>curl "${base}/api/search?keyword=overlord"</code></div>
+        </div>
+        <div class="tabPane" id="sFetch">
+          <div class="code-block"><code>fetch("${base}/api/search?keyword=overlord")
+  .then(r =&gt; r.json())
+  .then(console.log);</code></div>
+        </div>
+      </div>
+
       <table class="params-table">
         <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
         <tbody>
@@ -757,9 +735,10 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="episodes" style="margin-top:3rem;">
+    <section id="episodes" style="margin-top:2.1rem;">
       <h2 class="section-title">Episódios</h2>
       <p class="text-large">Lista episódios usando <strong>anime_id</strong>.</p>
+
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -771,6 +750,22 @@ module.exports = async (req, res) => {
         </div>
         <div class="endpoint-description">Parâmetro obrigatório: <code>anime_id</code>. Retorna episódios com <code>id</code> (episode_id).</div>
       </div>
+
+      <div class="codeTabs" data-tabs>
+        <div class="tabBar">
+          <button class="tabBtn active" data-tab="eCurl">cURL</button>
+          <button class="tabBtn" data-tab="eFetch">fetch</button>
+        </div>
+        <div class="tabPane active" id="eCurl">
+          <div class="code-block"><code>curl "${base}/api/episodes?anime_id=40927"</code></div>
+        </div>
+        <div class="tabPane" id="eFetch">
+          <div class="code-block"><code>fetch("${base}/api/episodes?anime_id=40927")
+  .then(r =&gt; r.json())
+  .then(console.log);</code></div>
+        </div>
+      </div>
+
       <table class="params-table">
         <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
         <tbody>
@@ -779,9 +774,10 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="episodevideo" style="margin-top:3rem;">
+    <section id="episodevideo" style="margin-top:2.1rem;">
       <h2 class="section-title">Vídeo do episódio</h2>
       <p class="text-large">Retorna o <strong>video_url</strong> usando <strong>episode_id</strong>.</p>
+
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -793,6 +789,22 @@ module.exports = async (req, res) => {
         </div>
         <div class="endpoint-description">Parâmetro obrigatório: <code>episode_id</code>. Resposta: <code>{ success, video_url }</code>.</div>
       </div>
+
+      <div class="codeTabs" data-tabs>
+        <div class="tabBar">
+          <button class="tabBtn active" data-tab="vCurl">cURL</button>
+          <button class="tabBtn" data-tab="vFetch">fetch</button>
+        </div>
+        <div class="tabPane active" id="vCurl">
+          <div class="code-block"><code>curl "${base}/api/episode-video?episode_id=40930"</code></div>
+        </div>
+        <div class="tabPane" id="vFetch">
+          <div class="code-block"><code>fetch("${base}/api/episode-video?episode_id=40930")
+  .then(r =&gt; r.json())
+  .then(console.log);</code></div>
+        </div>
+      </div>
+
       <table class="params-table">
         <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
         <tbody>
@@ -801,9 +813,10 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="lancamentos" style="margin-top:3rem;">
+    <section id="lancamentos" style="margin-top:2.1rem;">
       <h2 class="section-title">Lançamentos</h2>
       <p class="text-large"><strong>Único endpoint que aceita</strong> <code>limite</code>. Paginação via <code>pagina</code>.</p>
+
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -815,6 +828,7 @@ module.exports = async (req, res) => {
         </div>
         <div class="endpoint-description">Parâmetros opcionais: <code>pagina</code> e <code>limite</code>.</div>
       </div>
+
       <table class="params-table">
         <thead><tr><th>Parâmetro</th><th>Tipo</th><th>Descrição</th></tr></thead>
         <tbody>
@@ -824,9 +838,10 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="sinopse" style="margin-top:3rem;">
+    <section id="sinopse" style="margin-top:2.1rem;">
       <h2 class="section-title">Sinopse</h2>
       <p class="text-large">Busca sinopse via <code>nome</code>.</p>
+
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -840,9 +855,10 @@ module.exports = async (req, res) => {
       </div>
     </section>
 
-    <section id="generos" style="margin-top:3rem;">
+    <section id="generos" style="margin-top:2.1rem;">
       <h2 class="section-title">Gêneros</h2>
       <p class="text-large">Lista por gênero via <code>genero</code>.</p>
+
       <div class="endpoint-card">
         <div class="endpoint-head">
           <span class="endpoint-method">GET</span>
@@ -856,15 +872,29 @@ module.exports = async (req, res) => {
       </div>
     </section>
 
-    <section id="respostas" style="margin-top:3rem;">
+    <section id="respostas" style="margin-top:2.1rem;">
       <h2 class="section-title">Respostas</h2>
-      <div class="code-block"><code>{
+      <div class="codeTabs" data-tabs>
+        <div class="tabBar">
+          <button class="tabBtn active" data-tab="rOk">sucesso</button>
+          <button class="tabBtn" data-tab="rErr">erro</button>
+        </div>
+        <div class="tabPane active" id="rOk">
+          <div class="code-block"><code>{
   "sucesso": true,
   "dados": [...]
 }</code></div>
+        </div>
+        <div class="tabPane" id="rErr">
+          <div class="code-block"><code>{
+  "sucesso": false,
+  "erro": "mensagem"
+}</code></div>
+        </div>
+      </div>
     </section>
 
-    <section id="erros" style="margin-top:3rem;">
+    <section id="erros" style="margin-top:2.1rem;">
       <h2 class="section-title">Erros</h2>
       <table class="params-table">
         <thead><tr><th>Status</th><th>Quando acontece</th><th>Como resolver</th></tr></thead>
@@ -876,13 +906,12 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="changelog" style="margin-top:3rem;">
+    <section id="changelog" style="margin-top:2.1rem;">
       <h2 class="section-title">Changelog</h2>
       <div class="endpoint-card">
         <div class="endpoint-description">
-          <strong>v4</strong> • tema claro/escuro + mobile drawer + hash fix.<br>
-          <strong>v2</strong> • lançamentos com paginação/limite.<br>
-          <strong>v1</strong> • search / episodes / episode-video.
+          <strong>v5</strong> • tema claro sem modo escuro + layout mais compacto + tabs de código.<br>
+          <strong>v4</strong> • docs com navegação + hash fix.
         </div>
       </div>
     </section>
@@ -897,38 +926,13 @@ module.exports = async (req, res) => {
     <a href="${base}/api/generos?genero=acao">generos</a> ·
     <a href="${discordUserUrl}" target="_blank" rel="noreferrer">discord</a>
   </div>
-  <div style="margin-top:1.5rem;">
+  <div style="margin-top:1rem;">
     © 2026 anime api · developer by <strong>Lopes</strong> · <strong>dvhackz</strong>
   </div>
 </footer>
 
 <script>
 (function(){
-  const root = document.documentElement;
-  const themeBtn = document.getElementById('themeBtn');
-  const themeBtnMobile = document.getElementById('themeBtnMobile');
-  const themeBtnDrawer = document.getElementById('themeBtnDrawer');
-
-  function setTheme(next){
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('anime_api_theme', next);
-    const isDark = next === 'dark';
-    const label = isDark ? 'modo claro' : 'modo escuro';
-    if(themeBtn) themeBtn.textContent = label;
-    if(themeBtnMobile) themeBtnMobile.textContent = label;
-    if(themeBtnDrawer) themeBtnDrawer.textContent = label;
-  }
-
-  const saved = localStorage.getItem('anime_api_theme');
-  if(saved === 'dark' || saved === 'light') setTheme(saved);
-  else setTheme('dark');
-
-  function toggleTheme(){
-    const current = root.getAttribute('data-theme') || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  }
-  [themeBtn, themeBtnMobile, themeBtnDrawer].forEach(b => b && b.addEventListener('click', toggleTheme));
-
   async function copyText(text, btn){
     const old = btn.textContent;
     try{
@@ -1018,6 +1022,17 @@ module.exports = async (req, res) => {
     window.addEventListener("hashchange", go);
   })();
 
+  document.querySelectorAll('[data-tabs]').forEach(group=>{
+    const btns = Array.from(group.querySelectorAll('.tabBtn'));
+    const panes = Array.from(group.querySelectorAll('.tabPane'));
+    btns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-tab');
+        btns.forEach(b=>b.classList.toggle('active', b===btn));
+        panes.forEach(p=>p.classList.toggle('active', p.id === id));
+      });
+    });
+  });
 })();
 </script>
 
