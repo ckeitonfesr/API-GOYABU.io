@@ -6,10 +6,7 @@ module.exports = async (req, res) => {
     const keyword = String(req.query.keyword || "").trim();
 
     if (!keyword) {
-      return res.status(400).json({
-        success: false,
-        error: "keyword vazio"
-      });
+      return res.status(400).json({ success: false, error: "keyword vazio" });
     }
 
     const url = new URL(SEARCH);
@@ -22,19 +19,27 @@ module.exports = async (req, res) => {
 
     const data = await response.json();
 
-    const modified = Array.isArray(data)
-      ? data.map(item => {
-          const { genres, status, audio, ...rest } = item;
+    const normalizeItem = (item) => {
+      const { genres, status, audio, ...rest } = item || {};
+      return {
+        ...rest,
+        dublado: /dublado/i.test((item?.title || ""))
+      };
+    };
 
-          return {
-            ...rest,
-            dublado: /dublado/i.test(item.title || "")
-          };
-        })
-      : data;
+    let modified;
+
+    if (Array.isArray(data)) {
+      modified = data.map(normalizeItem);
+    } else if (data && typeof data === "object") {
+      modified = Object.fromEntries(
+        Object.entries(data).map(([id, item]) => [id, normalizeItem(item)])
+      );
+    } else {
+      modified = data;
+    }
 
     return res.status(response.status).json(modified);
-
   } catch (err) {
     return res.status(500).json({
       success: false,
