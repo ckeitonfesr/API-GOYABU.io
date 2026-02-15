@@ -16,8 +16,10 @@ module.exports = async (req, res) => {
     const animeId = String(req.query.anime_id || "").trim();
 
     if (!animeId || !/^\d+$/.test(animeId)) {
-      res.status(400).json({ success: false, error: "anime_id inválido" });
-      return;
+      return res.status(400).json({
+        success: false,
+        error: "anime_id inválido"
+      });
     }
 
     const url = new URL(AJAX);
@@ -36,7 +38,7 @@ module.exports = async (req, res) => {
     const data = await response.json();
 
     if (data?.success && Array.isArray(data.data)) {
-      data.data = data.data.map((ep) => ({
+      data.data = data.data.map(ep => ({
         id: ep?.id ?? null,
         episodio: String(ep?.episodio ?? ""),
         link: absUrl(ep?.link),
@@ -49,8 +51,12 @@ module.exports = async (req, res) => {
       }));
     }
 
-    res.status(200).json(data);
+    return res.status(200).json(data);
+
   } catch (err) {
-    res.status(500).json({ success: false, error: String(err?.message || err) });
+    return res.status(500).json({
+      success: false,
+      error: String(err?.message || err)
+    });
   }
 };
