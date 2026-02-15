@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const discordUserUrl = "https://discord.com/users/1295419742475255933";
 
   const html = `<!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,9 +28,9 @@ module.exports = async (req, res) => {
     --codeBg:#0c121c;
     --codeText:#deecff;
     --codeBorder:#1e2a3a;
-    --accent:#2266cc;
-    --accentSoft:#edf4fe;
-    --accentBorder:#ccdefa;
+    --accent:#111827;
+    --accentSoft:#eef2ff;
+    --accentBorder:#dbe6ff;
     --methodBg:#0b1e33;
     --methodBorder:#1e3a5f;
     --btnBg:#ffffff;
@@ -39,29 +39,38 @@ module.exports = async (req, res) => {
     --radiusSide:20px;
     --radiusMain:32px;
     --radiusSoft:16px;
+
+    --h1: clamp(1.35rem, 1.05rem + 1.1vw, 1.85rem);
+    --h2: clamp(1.05rem, .95rem + .6vw, 1.25rem);
+    --p: clamp(.92rem, .88rem + .25vw, 1.02rem);
+    --small: clamp(.78rem, .76rem + .15vw, .88rem);
+    --mono: clamp(.84rem, .80rem + .2vw, .95rem);
   }
 
   [data-theme="dark"]{
-    --bg:#070A12;
-    --text:#EAF1FF;
-    --muted:rgba(234,241,255,.72);
-    --card:#0E1524;
-    --card2:#101A2D;
+    --bg:#05060A;
+    --text:#EDEFF6;
+    --muted:rgba(237,239,246,.70);
+    --card:#0A0C11;
+    --card2:#0D1017;
     --line:rgba(255,255,255,.10);
     --line2:rgba(255,255,255,.08);
-    --shadow: 0 28px 70px -35px rgba(0,0,0,.65);
-    --shadow2: 0 22px 50px -30px rgba(0,0,0,.6);
-    --codeBg:#070B12;
-    --codeText:#deecff;
+    --shadow: 0 28px 70px -35px rgba(0,0,0,.70);
+    --shadow2: 0 22px 50px -30px rgba(0,0,0,.68);
+    --codeBg:#07080C;
+    --codeText:#E7EAF2;
     --codeBorder:rgba(255,255,255,.12);
-    --accent:#7AA7FF;
-    --accentSoft:rgba(122,167,255,.12);
-    --accentBorder:rgba(122,167,255,.22);
-    --methodBg:#0B1020;
-    --methodBorder:rgba(255,255,255,.12);
-    --btnBg:rgba(255,255,255,.04);
+
+    --accent:#EDEFF6;
+    --accentSoft:rgba(255,255,255,.06);
+    --accentBorder:rgba(255,255,255,.12);
+
+    --methodBg:#0C0F16;
+    --methodBorder:rgba(255,255,255,.14);
+
+    --btnBg:rgba(255,255,255,.05);
     --btnBorder:rgba(255,255,255,.12);
-    --btnHover:rgba(255,255,255,.08);
+    --btnHover:rgba(255,255,255,.09);
   }
 
   *{margin:0;padding:0;box-sizing:border-box}
@@ -70,9 +79,10 @@ module.exports = async (req, res) => {
     font-family:'Inter',sans-serif;
     background:var(--bg);
     color:var(--text);
-    line-height:1.5;
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
     padding:2rem;
+    font-size:var(--p);
   }
 
   .container{
@@ -113,18 +123,18 @@ module.exports = async (req, res) => {
     min-width:0;
   }
   .brand .title{
-    font-weight:800;
+    font-weight:900;
     letter-spacing:-0.02em;
-    font-size:1.05rem;
+    font-size:1.02rem;
     display:flex;
     align-items:center;
     gap:.5rem;
     min-width:0;
   }
   .pill{
-    font-size:.72rem;
-    font-weight:700;
-    padding:.22rem .6rem;
+    font-size:.70rem;
+    font-weight:800;
+    padding:.20rem .58rem;
     border-radius:999px;
     background:var(--accentSoft);
     color:var(--accent);
@@ -133,7 +143,7 @@ module.exports = async (req, res) => {
   }
   .meta{
     color:var(--muted);
-    font-size:.84rem;
+    font-size:var(--small);
     line-height:1.35;
   }
 
@@ -141,7 +151,7 @@ module.exports = async (req, res) => {
     border:1px solid var(--btnBorder);
     background:var(--btnBg);
     color:var(--text);
-    font-weight:700;
+    font-weight:800;
     font-size:.78rem;
     padding:.55rem .7rem;
     border-radius:12px;
@@ -179,10 +189,10 @@ module.exports = async (req, res) => {
 
   .sidebar-section{margin-top:1.5rem}
   .sidebar-section-title{
-    font-size:0.7rem;
-    font-weight:600;
+    font-size:.68rem;
+    font-weight:700;
     text-transform:uppercase;
-    letter-spacing:0.06em;
+    letter-spacing:0.08em;
     color:var(--muted);
     margin-bottom:1rem;
     padding-left:0.75rem;
@@ -191,70 +201,70 @@ module.exports = async (req, res) => {
   .sidebar-nav-item{margin-bottom:0.2rem}
   .sidebar-nav-link{
     display:block;
-    padding:0.6rem 0.75rem;
+    padding:0.58rem 0.75rem;
     color:var(--text);
     text-decoration:none;
-    font-size:0.9rem;
-    font-weight:500;
+    font-size:.90rem;
+    font-weight:600;
     border-radius:12px;
     transition:all 0.15s ease;
     border-left:2px solid transparent;
-    opacity:.85;
+    opacity:.86;
   }
   .sidebar-nav-link:hover{
     background:var(--btnHover);
-    border-left-color:var(--accent);
+    border-left-color:rgba(255,255,255,.35);
     opacity:1;
   }
   .sidebar-nav-link.active{
     background:var(--btnHover);
-    border-left-color:var(--accent);
+    border-left-color:rgba(255,255,255,.35);
     opacity:1;
   }
 
   .content{
     background:var(--card);
     border-radius:var(--radiusMain);
-    padding:3rem;
+    padding:2.6rem;
     box-shadow:var(--shadow);
     border:1px solid rgba(0,0,0,0.02);
   }
   [data-theme="dark"] .content{ border-color: var(--line); }
 
   .section-title{
-    font-size:2rem;
-    font-weight:700;
-    letter-spacing:-0.015em;
-    margin-bottom:1.5rem;
+    font-size:var(--h1);
+    font-weight:850;
+    letter-spacing:-0.02em;
+    margin-bottom:1.25rem;
     color:var(--text);
-    border-bottom:2px solid var(--line2);
-    padding-bottom:0.75rem;
+    border-bottom:1px solid var(--line2);
+    padding-bottom:.75rem;
   }
   .subsection-title{
-    font-size:1.35rem;
-    font-weight:700;
-    margin:2.5rem 0 1rem 0;
+    font-size:var(--h2);
+    font-weight:850;
+    margin:2.2rem 0 1rem 0;
     color:var(--text);
     letter-spacing:-0.01em;
   }
   .text-large{
-    font-size:1.05rem;
+    font-size:var(--p);
     color:var(--muted);
-    margin-bottom:1.5rem;
+    margin-bottom:1.25rem;
   }
 
   .endpoint-card{
     background:var(--card2);
     border-radius:20px;
-    padding:1.5rem;
-    margin:1.5rem 0;
+    padding:1.35rem;
+    margin:1.35rem 0;
     border:1px solid var(--line);
     transition:all 0.2s;
   }
   .endpoint-card:hover{
-    border-color:rgba(34,102,204,.28);
+    border-color:rgba(255,255,255,.18);
     background:var(--card);
-    box-shadow:0 10px 25px -18px rgba(30,58,138,.22);
+    box-shadow:0 10px 25px -18px rgba(0,0,0,.35);
   }
 
   .endpoint-head{
@@ -265,21 +275,21 @@ module.exports = async (req, res) => {
   }
   .endpoint-method{
     display:inline-block;
-    font-weight:800;
-    font-size:0.7rem;
-    padding:0.25rem 0.9rem;
+    font-weight:900;
+    font-size:.68rem;
+    padding:0.22rem 0.85rem;
     border-radius:30px;
     background:var(--methodBg);
-    color:white;
-    letter-spacing:0.02em;
+    color:var(--text);
+    letter-spacing:0.08em;
     text-transform:uppercase;
     border:1px solid var(--methodBorder);
   }
   .endpoint-path{
     font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
-    font-size:1.02rem;
+    font-size:var(--mono);
     color:var(--text);
-    font-weight:700;
+    font-weight:800;
     word-break:break-word;
   }
   .endpoint-actions{
@@ -291,66 +301,67 @@ module.exports = async (req, res) => {
   .endpoint-description{
     margin:.75rem 0 0 0;
     color:var(--muted);
-    font-size:.95rem;
+    font-size:var(--p);
   }
 
   .code-block{
     background:var(--codeBg);
     color:var(--codeText);
-    padding:1.2rem;
+    padding:1.1rem;
     border-radius:18px;
     font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;
-    font-size:0.9rem;
+    font-size:var(--mono);
     overflow-x:auto;
-    margin:1.5rem 0;
+    margin:1.35rem 0;
     border:1px solid var(--codeBorder);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
   }
-  .code-block code{color:#b7d1f0}
+  .code-block code{color:rgba(231,234,242,.92)}
 
   .params-table{
     width:100%;
     border-collapse:collapse;
-    margin:1.5rem 0;
-    font-size:0.9rem;
+    margin:1.35rem 0;
+    font-size:var(--p);
     border-radius:16px;
     overflow:hidden;
     border:1px solid var(--line);
   }
   .params-table th{
     text-align:left;
-    padding:0.9rem 1.2rem;
+    padding:0.85rem 1.1rem;
     background:var(--accentSoft);
     border-bottom:1px solid var(--line);
     color:var(--text);
-    font-weight:800;
-    font-size:0.8rem;
+    font-weight:900;
+    font-size:.72rem;
     text-transform:uppercase;
-    letter-spacing:0.03em;
+    letter-spacing:0.08em;
   }
   .params-table td{
-    padding:0.9rem 1.2rem;
+    padding:0.85rem 1.1rem;
     border-bottom:1px solid var(--line);
     color:var(--muted);
     vertical-align:top;
   }
   .params-table tr:last-child td{border-bottom:none}
   .param-required{
-    color:#cc2e4a;
-    font-size:0.7rem;
-    font-weight:800;
+    color:#ff4d6d;
+    font-size:.68rem;
+    font-weight:900;
     margin-left:0.5rem;
-    background:#ffeef0;
-    padding:0.15rem 0.5rem;
+    background:rgba(255,77,109,.12);
+    padding:0.12rem 0.5rem;
     border-radius:30px;
     display:inline-block;
+    border:1px solid rgba(255,77,109,.22);
   }
 
   .tip-box{
     background:var(--accentSoft);
     border-radius:16px;
-    padding:1.25rem;
-    margin:1.25rem 0;
+    padding:1.15rem;
+    margin:1.15rem 0;
     border:1px solid var(--accentBorder);
   }
   .tip-box strong{
@@ -358,29 +369,29 @@ module.exports = async (req, res) => {
     display:block;
     margin-bottom:0.3rem;
     font-size:1rem;
-    font-weight:800;
+    font-weight:900;
   }
-  .tip-box p{color:var(--muted); font-size:0.95rem}
+  .tip-box p{color:var(--muted); font-size:var(--p)}
   .tip-box a{
-    color:var(--accent);
+    color:var(--text);
     text-decoration:none;
-    font-weight:800;
+    font-weight:900;
     border-bottom:1px solid transparent;
     transition:border 0.1s;
   }
-  .tip-box a:hover{border-bottom-color:var(--accent)}
+  .tip-box a:hover{border-bottom-color:rgba(255,255,255,.35)}
 
   .grid-2{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:1.25rem;
-    margin:1.25rem 0;
+    gap:1.15rem;
+    margin:1.15rem 0;
   }
   .mini{
     background:var(--card);
     border:1px solid var(--line);
     border-radius:18px;
-    padding:1.25rem;
+    padding:1.1rem;
   }
   .tag{
     display:inline-flex;
@@ -388,11 +399,11 @@ module.exports = async (req, res) => {
     gap:.4rem;
     padding:.25rem .6rem;
     border-radius:999px;
-    font-size:.75rem;
+    font-size:.72rem;
     font-weight:900;
     background:var(--accentSoft);
     border:1px solid var(--accentBorder);
-    color:var(--accent);
+    color:var(--text);
   }
 
   .profile{
@@ -407,14 +418,11 @@ module.exports = async (req, res) => {
     padding:.85rem;
     border-radius:16px;
     border:1px solid var(--line);
-    background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.00));
-  }
-  [data-theme="dark"] .profileCard{
     background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.00));
   }
   .avatar{
     width:46px;height:46px;border-radius:50%;
-    border:2px solid rgba(255,255,255,.35);
+    border:1px solid rgba(255,255,255,.18);
     object-fit:cover;
     background:#000;
   }
@@ -443,8 +451,29 @@ module.exports = async (req, res) => {
     color:var(--text);
     text-decoration:none;
     transition:.15s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
   }
   .plink:hover{background:var(--btnHover)}
+
+  /* NOVO: botão do discord embaixo (só PC) */
+  .plinkBelow{
+    margin-top:.6rem;
+    width:100%;
+    display:none;
+    padding:.7rem .85rem;
+    border-radius:14px;
+    border:1px solid var(--btnBorder);
+    background:var(--btnBg);
+    color:var(--text);
+    text-decoration:none;
+    font-weight:900;
+    font-size:.82rem;
+    text-align:center;
+    transition:.15s;
+  }
+  .plinkBelow:hover{ background:var(--btnHover); }
 
   .footer{
     max-width:1400px;
@@ -459,8 +488,8 @@ module.exports = async (req, res) => {
     color:var(--text);
     text-decoration:none;
     margin:0 .75rem;
-    font-weight:700;
-    opacity:.85;
+    font-weight:800;
+    opacity:.88;
   }
   .footer a:hover{opacity:1}
 
@@ -477,7 +506,7 @@ module.exports = async (req, res) => {
     margin:-2rem -2rem 1rem;
   }
   [data-theme="dark"] .mobileBar{
-    background:rgba(7,10,18,.75);
+    background:rgba(5,6,10,.80);
   }
   .mobileBarInner{
     max-width:1400px;
@@ -534,18 +563,22 @@ module.exports = async (req, res) => {
     .mobileBar{ display:block; margin:-1rem -1rem 1rem; }
     .container{ grid-template-columns:1fr; }
     .sidebar{ display:none; }
-    .content{ padding:1.6rem; border-radius:22px; }
+    .content{ padding:1.5rem; border-radius:22px; }
     .grid-2{ grid-template-columns:1fr; }
     .endpoint-actions{ width:100%; margin-left:0; }
-    .section-title{ font-size:1.65rem; }
   }
 
   @media (max-width: 420px){
-    .content{ padding:1.2rem; }
-    .endpoint-card{ padding:1.1rem; }
-    .endpoint-path{ font-size:.95rem; }
-    .code-block{ padding:1rem; font-size:.85rem; }
+    .content{ padding:1.15rem; }
+    .endpoint-card{ padding:1.05rem; }
+    .code-block{ padding:1rem; }
     .params-table th, .params-table td{ padding:.75rem .85rem; }
+  }
+
+  /* PC: move discord pra baixo do perfil (desktop) */
+  @media (min-width: 901px){
+    .sidebar .profileCard .plink{ display:none; }
+    .sidebar .plinkBelow{ display:block; }
   }
 </style>
 </head>
@@ -557,7 +590,7 @@ module.exports = async (req, res) => {
       <button class="menuBtn" id="openMenu">menu</button>
       <span>Anime API <span class="pill">docs</span></span>
     </div>
-    <button class="themeBtn" id="themeBtnMobile">modo escuro</button>
+    <button class="themeBtn" id="themeBtnMobile">modo claro</button>
   </div>
 </div>
 
@@ -573,7 +606,7 @@ module.exports = async (req, res) => {
     <p><code>${base}</code></p>
     <div style="margin-top:.8rem; display:flex; gap:.55rem;">
       <button class="copybtn" id="copyBaseMobile">copiar</button>
-      <button class="themeBtn" id="themeBtnDrawer">modo escuro</button>
+      <button class="themeBtn" id="themeBtnDrawer">modo claro</button>
     </div>
   </div>
 
@@ -612,7 +645,7 @@ module.exports = async (req, res) => {
       <img class="avatar" src="${avatar}" alt="Lopes">
       <div class="pmeta">
         <div class="pname">Lopes</div>
-        <div class="puser">@dvhackzzz</div>
+        <div class="puser">@dvhackz</div>
       </div>
       <a class="plink" href="${discordUserUrl}" target="_blank" rel="noreferrer">discord</a>
     </div>
@@ -627,7 +660,7 @@ module.exports = async (req, res) => {
         <div class="title">Anime API <span class="pill">docs</span></div>
         <div class="meta">Busca animes, episódios, lançamentos e link de vídeo.</div>
       </div>
-      <button class="themeBtn" id="themeBtn">modo escuro</button>
+      <button class="themeBtn" id="themeBtn">modo claro</button>
     </div>
 
     <div class="baseRow">
@@ -670,10 +703,11 @@ module.exports = async (req, res) => {
         <img class="avatar" src="${avatar}" alt="Lopes">
         <div class="pmeta">
           <div class="pname">Lopes</div>
-          <div class="puser">@dvhackzzz</div>
+          <div class="puser">@dvhackz</div>
         </div>
         <a class="plink" href="${discordUserUrl}" target="_blank" rel="noreferrer">discord</a>
       </div>
+      <a class="plinkBelow" href="${discordUserUrl}" target="_blank" rel="noreferrer">entrar no discord</a>
     </div>
   </aside>
 
@@ -694,14 +728,14 @@ module.exports = async (req, res) => {
       </div>
     </section>
 
-    <section id="fluxo" style="margin-top:3.5rem;">
+    <section id="fluxo" style="margin-top:3rem;">
       <h2 class="section-title">Fluxo (nome → vídeo)</h2>
       <p class="text-large">
         Ordem: <strong>Nome</strong> → <strong>anime_id</strong> → <strong>episodes</strong> → <strong>episode_id</strong> → <strong>video_url</strong>.
       </p>
     </section>
 
-    <section id="search" style="margin-top:3.5rem;">
+    <section id="search" style="margin-top:3rem;">
       <h2 class="section-title">Search</h2>
       <p class="text-large">Busca por palavra-chave. Parâmetro obrigatório: <code>keyword</code>.</p>
       <div class="endpoint-card">
@@ -723,7 +757,7 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="episodes" style="margin-top:3.5rem;">
+    <section id="episodes" style="margin-top:3rem;">
       <h2 class="section-title">Episódios</h2>
       <p class="text-large">Lista episódios usando <strong>anime_id</strong>.</p>
       <div class="endpoint-card">
@@ -745,7 +779,7 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="episodevideo" style="margin-top:3.5rem;">
+    <section id="episodevideo" style="margin-top:3rem;">
       <h2 class="section-title">Vídeo do episódio</h2>
       <p class="text-large">Retorna o <strong>video_url</strong> usando <strong>episode_id</strong>.</p>
       <div class="endpoint-card">
@@ -767,7 +801,7 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="lancamentos" style="margin-top:3.5rem;">
+    <section id="lancamentos" style="margin-top:3rem;">
       <h2 class="section-title">Lançamentos</h2>
       <p class="text-large"><strong>Único endpoint que aceita</strong> <code>limite</code>. Paginação via <code>pagina</code>.</p>
       <div class="endpoint-card">
@@ -790,7 +824,7 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="sinopse" style="margin-top:3.5rem;">
+    <section id="sinopse" style="margin-top:3rem;">
       <h2 class="section-title">Sinopse</h2>
       <p class="text-large">Busca sinopse via <code>nome</code>.</p>
       <div class="endpoint-card">
@@ -806,7 +840,7 @@ module.exports = async (req, res) => {
       </div>
     </section>
 
-    <section id="generos" style="margin-top:3.5rem;">
+    <section id="generos" style="margin-top:3rem;">
       <h2 class="section-title">Gêneros</h2>
       <p class="text-large">Lista por gênero via <code>genero</code>.</p>
       <div class="endpoint-card">
@@ -822,7 +856,7 @@ module.exports = async (req, res) => {
       </div>
     </section>
 
-    <section id="respostas" style="margin-top:3.5rem;">
+    <section id="respostas" style="margin-top:3rem;">
       <h2 class="section-title">Respostas</h2>
       <div class="code-block"><code>{
   "sucesso": true,
@@ -830,7 +864,7 @@ module.exports = async (req, res) => {
 }</code></div>
     </section>
 
-    <section id="erros" style="margin-top:3.5rem;">
+    <section id="erros" style="margin-top:3rem;">
       <h2 class="section-title">Erros</h2>
       <table class="params-table">
         <thead><tr><th>Status</th><th>Quando acontece</th><th>Como resolver</th></tr></thead>
@@ -842,7 +876,7 @@ module.exports = async (req, res) => {
       </table>
     </section>
 
-    <section id="changelog" style="margin-top:3.5rem;">
+    <section id="changelog" style="margin-top:3rem;">
       <h2 class="section-title">Changelog</h2>
       <div class="endpoint-card">
         <div class="endpoint-description">
@@ -864,7 +898,7 @@ module.exports = async (req, res) => {
     <a href="${discordUserUrl}" target="_blank" rel="noreferrer">discord</a>
   </div>
   <div style="margin-top:1.5rem;">
-    © 2026 anime api · developer by <strong>Lopes</strong> · <strong>dvhackzzz</strong>
+    © 2026 anime api · developer by <strong>Lopes</strong> · <strong>dvhackz</strong>
   </div>
 </footer>
 
@@ -879,7 +913,7 @@ module.exports = async (req, res) => {
     root.setAttribute('data-theme', next);
     localStorage.setItem('anime_api_theme', next);
     const isDark = next === 'dark';
-    const label = isDark ? 'modo padrão' : 'modo escuro';
+    const label = isDark ? 'modo claro' : 'modo escuro';
     if(themeBtn) themeBtn.textContent = label;
     if(themeBtnMobile) themeBtnMobile.textContent = label;
     if(themeBtnDrawer) themeBtnDrawer.textContent = label;
@@ -887,10 +921,10 @@ module.exports = async (req, res) => {
 
   const saved = localStorage.getItem('anime_api_theme');
   if(saved === 'dark' || saved === 'light') setTheme(saved);
-  else setTheme('light');
+  else setTheme('dark');
 
   function toggleTheme(){
-    const current = root.getAttribute('data-theme') || 'light';
+    const current = root.getAttribute('data-theme') || 'dark';
     setTheme(current === 'dark' ? 'light' : 'dark');
   }
   [themeBtn, themeBtnMobile, themeBtnDrawer].forEach(b => b && b.addEventListener('click', toggleTheme));
@@ -918,7 +952,6 @@ module.exports = async (req, res) => {
     btn.addEventListener('click', ()=>copyText(btn.getAttribute('data-copy')||'', btn));
   });
 
-  // active link
   const navLinks = Array.from(document.querySelectorAll('.sidebar-nav-link'));
   const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 
@@ -950,7 +983,6 @@ module.exports = async (req, res) => {
   }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.1,0.2,0.35,0.5,0.65] });
   sections.forEach(s=>io.observe(s));
 
-  // drawer
   const drawer = document.getElementById('drawer');
   const backdrop = document.getElementById('backdrop');
   const openMenu = document.getElementById('openMenu');
@@ -970,7 +1002,6 @@ module.exports = async (req, res) => {
   if(closeMenuBtn) closeMenuBtn.addEventListener('click', closeDrawer);
   if(backdrop) backdrop.addEventListener('click', closeDrawer);
 
-  // hash jump FIX (abre direto no #search etc)
   (function jumpToHashOnLoad(){
     const go = () => {
       const h = location.hash;
