@@ -22,15 +22,16 @@ module.exports = async (req, res) => {
       }
     });
 
-    const text = await response.text();
+    const data = await response.json();
 
-    res.statusCode = response.status;
-    res.setHeader(
-      "Content-Type",
-      response.headers.get("content-type") || "application/json"
-    );
+    const modified = Array.isArray(data)
+      ? data.map(item => ({
+          ...item,
+          dublado: /dublado/i.test(item.title || "")
+        }))
+      : data;
 
-    return res.end(text);
+    return res.status(response.status).json(modified);
 
   } catch (err) {
     return res.status(500).json({
