@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.ibb.co/6RgzrZ7d/baixados.jpg" width="120" style="border-radius: 24px;" />
+  <img src="https://i.ibb.co/6RgzrZ7d/baixados.jpg" width="120" style="border-radius: 50%;" />
 </p>
 
 <h1 align="center">Anime API · Documentação</h1>
