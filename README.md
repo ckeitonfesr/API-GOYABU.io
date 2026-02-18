@@ -20,7 +20,7 @@
 
 ---
 
-## 📦 Base URL
+##  Base URL
 
 ```txt
 https://anime-api-kappa-one.vercel.app
